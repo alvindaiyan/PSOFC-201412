@@ -32,7 +32,7 @@ import net.sf.javaml.core.DefaultDataset;
 import net.sf.javaml.core.Instance;
 import net.sf.javaml.tools.data.FileHandler;
 
-
+@Deprecated
 public class Main_array
 {
 
@@ -135,9 +135,8 @@ public class Main_array
         double[] CFOrgAccTestingRunsYan = new double[number_of_runs];
         double[] CFOrgAccTrainingRunsYan = new double[number_of_runs];
 
-        char[][] operatorsRuns = new char[number_of_runs][dimension - 1]; // temperory, this need to
-        // according the results of
-        // the selected operators
+        char[][] operatorsRuns = new char[number_of_runs][dimension - 1];
+        // temperory, this need to according the results of the selected operators
 
         double[][] constructedFeatureTrRuns = new double[number_of_runs][training.size()];
         double[][] constructedFeatureTtRuns = new double[number_of_runs][testing.size()];

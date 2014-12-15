@@ -26,15 +26,27 @@ public abstract class BaseRepresentationRun
 
 
 
-    private int dimension = 0;
-    private int number_of_runs = 50;
-    private double w = 0.729844;
-    private double c1 = 1.49618, c2 = 1.49618;
-    private int number_of_particles = 30;
-    private int number_of_iterations = 100;
-    private Topology topology = new TopologyRing(30);
-    private Dataset data;
-    Problem problem;
+    protected int dimension = 0;
+    protected int number_of_runs = 50;
+    protected double w = 0.729844;
+    protected double c1 = 1.49618, c2 = 1.49618;
+    protected int number_of_particles = 30;
+    protected int number_of_iterations = 100;
+    protected Topology topology = new TopologyRing(30);
+    protected Dataset data;
+    protected Problem problem;
+
+    protected Dataset training;
+    protected Dataset testing;
+    protected int training_size;
+    protected int testing_size;
+
+    protected PrintResult.Record record;
+
+    protected Dataset[] foldsTrain;
+    protected int noFeatures;
+
+
 
     public void setup()
     {
@@ -44,7 +56,7 @@ public abstract class BaseRepresentationRun
             String fname = "australian";
             String dir = "file_array";
 
-            int noFeatures = Integer.parseInt(ReadResults.read1Line("Data/" + fname + "/noFeatures.txt"));
+            this.noFeatures = Integer.parseInt(ReadResults.read1Line("Data/" + fname + "/noFeatures.txt"));
             this.data = FileHandler.loadDataset(new File("Data/" + fname + "/Data.data"), noFeatures, ",");
 
             this.dimension = noFeatures * 2 - 1;
@@ -64,12 +76,12 @@ public abstract class BaseRepresentationRun
                 System.out.println(entry.getKey() + ": " + entry.getValue());
             }
 
-            Dataset[] foldsTrain = originalAcc.getTraining().folds(TOTAL_FOLDS_NUMBER, new Random(1));
+            this.foldsTrain = originalAcc.getTraining().folds(TOTAL_FOLDS_NUMBER, new Random(1));
+            this.training = originalAcc.getTraining();
+            this.testing = originalAcc.getTesting();
 
-
-
-
-
+            this.training_size = originalAcc.getTraining().size();
+            this.testing_size = originalAcc.getTesting().size();
 
         }
         catch (IOException e)
@@ -77,8 +89,6 @@ public abstract class BaseRepresentationRun
             e.printStackTrace();
         }
     }
-
-
 
 
     public long[] getRandomSeeder()
@@ -93,5 +103,7 @@ public abstract class BaseRepresentationRun
 
 
 
-    public abstract void start();
+
+
+    public abstract void start(long[] seeder);
 }

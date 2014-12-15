@@ -31,7 +31,7 @@ import net.sf.javaml.core.Dataset;
 import net.sf.javaml.core.DefaultDataset;
 import net.sf.javaml.tools.data.FileHandler;
 
-
+@Deprecated
 public class Main_Pair
 {
 
@@ -91,60 +91,41 @@ public class Main_Pair
         Dataset[] foldsTrain = training.folds(numFolds, new Random(1));
 
         /** Sava the results */
-        double[][] gbestRunsIterations = new double[number_of_runs][number_of_iterations]; // get
-        // best
-        // fitness
-        // in
-        // each
-        // iterate
-        // in
-        // each
-        // run
+        double[][] gbestRunsIterations = new double[number_of_runs][number_of_iterations];
+        // get best fitness in each iterate in each run
         double[][] eroGbestRunsIterations = new double[number_of_runs][number_of_iterations];
 
         double[] bestFitnessRuns = new double[number_of_runs]; // get final
-        // bestfitnes in
-        // each run
+        // bestfitnes in each run
 
-        double[] accTestRunsYan = new double[number_of_runs]; // the best
-        // testing
-        // accuracy in
-        // each run
+        double[] accTestRunsYan = new double[number_of_runs];
+        // the best testing accuracy in each run
         double[] accTrainRunsYan = new double[number_of_runs];
         int YanNum1 = number_of_runs;
         int YanNum2 = number_of_runs;
 
         double[] accTestRunsDT = new double[number_of_runs]; // the best testing
-        // accuracy in
-        // each run
+        // accuracy in each run
         double[] accTrainRunsDT = new double[number_of_runs];
         int DTNum1 = number_of_runs;
         int DTNum2 = number_of_runs;
 
-        double[] accTestRunsKNN = new double[number_of_runs]; // the best
-        // testing
-        // accuracy in
-        // each run
+        double[] accTestRunsKNN = new double[number_of_runs];
+        // the best testing accuracy in each run
         double[] accTrainRunsKNN = new double[number_of_runs];
         int KNNNum1 = number_of_runs;
         int KNNNum2 = number_of_runs;
 
-        double[] accTestRunsNB = new double[number_of_runs]; // the best testing
-        // accuracy in
-        // each run
+        double[] accTestRunsNB = new double[number_of_runs];
+        // the best testing accuracy in each run
         double[] accTrainRunsNB = new double[number_of_runs];
         int NBNum1 = number_of_runs;
         int NBNum2 = number_of_runs;
 
-        double[][] bestPositionRuns = new double[number_of_runs][dimension];// get
-        // the
-        // position
-        // of
-        // best
-        // results
-        // in
-        // each
-        // run;
+        // get the position of best results in each run;
+        double[][] bestPositionRuns = new double[number_of_runs][dimension];
+
+
         long[] timeRuns = new long[number_of_runs];
 
         double[] CFOrgAccTestingRunsDT = new double[number_of_runs];
