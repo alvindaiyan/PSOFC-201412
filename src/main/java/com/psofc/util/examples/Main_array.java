@@ -386,7 +386,7 @@ public class Main_array
 
             timeRuns[r] = estimatedTime;
             System.out.println("");
-        }// end all runsn
+        }// end all run
 
 		/* All finished here */
         DecimalFormat df = new DecimalFormat("##.##");
@@ -472,9 +472,7 @@ public class Main_array
 
         System.out.println("");
         double aveTrainAccYan = NewMath.Mean_STD(accTrainRunsYan)[0]; // when
-        // Aa=0.0,
-        // fitness=
-        // trAcc
+        // Aa=0.0, fitness=trAcc
         double stdTrainAccYan = NewMath.Mean_STD(accTrainRunsYan)[1];
         System.out.println("YAN Average Training accuracy: " + aveTrainAccYan);
         System.out.println("YAN Standard Deviation of Training accuracy:  "
@@ -482,9 +480,7 @@ public class Main_array
 
         System.out.println("");
         double aveTrainAccDT = NewMath.Mean_STD(accTrainRunsDT)[0]; // when
-        // Aa=0.0,
-        // fitness=
-        // trAcc
+        // Aa=0.0, fitness= trAcc
         double stdTrainAccDT = NewMath.Mean_STD(accTrainRunsDT)[1];
         System.out.println("DT Average Training accuracy: " + aveTrainAccDT);
         System.out.println("DT Standard Deviation of Training accuracy:  "
@@ -492,9 +488,7 @@ public class Main_array
 
         System.out.println("");
         double aveTrainAccNB = NewMath.Mean_STD(accTrainRunsNB)[0]; // when
-        // Aa=0.0,
-        // fitness=
-        // trAcc
+        // Aa=0.0, fitness= trAcc
         double stdTrainAccNB = NewMath.Mean_STD(accTrainRunsNB)[1];
         System.out.println("NB Average Training accuracy: " + aveTrainAccNB);
         System.out.println("NB Standard Deviation of Training accuracy:  "
@@ -502,9 +496,7 @@ public class Main_array
 
         System.out.println("");
         double aveTrainAccKNN = NewMath.Mean_STD(accTrainRunsKNN)[0]; // when
-        // Aa=0.0,
-        // fitness=
-        // trAcc
+        // Aa=0.0, fitness= trAcc
         double stdTrainAccKNN = NewMath.Mean_STD(accTrainRunsKNN)[1];
         System.out.println("KNN Average Training accuracy: " + aveTrainAccKNN);
         System.out.println("KNN Standard Deviation of Training accuracy:  "
@@ -675,18 +667,18 @@ public class Main_array
         try
         {
             OutputYan out = new OutputYan(dir, fname);
-            out.printYan(number_of_iterations, number_of_runs,
-                    averageGbestIterations, aveErTrainIterations, df, dg,
-                    accTestRunsYan, timeRuns, bestAccTest, aveTrainAccYan,
-                    aveAccTestYan, stdAccTestYan, stdTrainAccYan, fullTest,
-                    aveFitness, stdFitness, accTrainRunsYan, bestFitnessRuns,
-                    bestRun, dimension, bestPositionRuns, gbestRunsIterations,
-                    eroGbestRunsIterations, fullTrain, accTrainRunsYan,
-                    accTestRunsYan, accTrainRunsDT, accTestRunsDT,
-                    CFOrgAccTrainingRunsDT, CFOrgAccTestingRunsDT,
-                    accTrainRunsNB, accTestRunsNB, CFOrgAccTrainingRunsNB,
-                    CFOrgAccTestingRunsNB, accTrainRunsKNN, accTestRunsKNN,
-                    CFOrgAccTrainingRunsKNN, CFOrgAccTestingRunsKNN);
+//            out.printYan(number_of_iterations, number_of_runs,
+//                    averageGbestIterations, aveErTrainIterations, df, dg,
+//                    accTestRunsYan, timeRuns, bestAccTest, aveTrainAccYan,
+//                    aveAccTestYan, stdAccTestYan, stdTrainAccYan, fullTest,
+//                    aveFitness, stdFitness, accTrainRunsYan, bestFitnessRuns,
+//                    bestRun, dimension, bestPositionRuns, gbestRunsIterations,
+//                    eroGbestRunsIterations, fullTrain, accTrainRunsYan,
+//                    accTestRunsYan, accTrainRunsDT, accTestRunsDT,
+//                    CFOrgAccTrainingRunsDT, CFOrgAccTestingRunsDT,
+//                    accTrainRunsNB, accTestRunsNB, CFOrgAccTrainingRunsNB,
+//                    CFOrgAccTestingRunsNB, accTrainRunsKNN, accTestRunsKNN,
+//                    CFOrgAccTrainingRunsKNN, CFOrgAccTestingRunsKNN);
 
             out.printOperators(operatorsRuns, number_of_runs);
 

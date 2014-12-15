@@ -12,6 +12,7 @@ import net.sf.javaml.tools.data.FileHandler;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.Map;
 import java.util.Random;
 
@@ -41,21 +42,23 @@ public abstract class BaseRepresentationRun
     protected int training_size;
     protected int testing_size;
 
+
+    protected double fullTrain;
+    protected double fullTest;
+
     protected PrintResult.Record record;
 
     protected Dataset[] foldsTrain;
     protected int noFeatures;
+    protected DecimalFormat df = new DecimalFormat("##.##");
+    protected DecimalFormat dg = new DecimalFormat("##.#E0");
 
 
-
-    public void setup()
+    public boolean setup(String fname, String dir)
     {
         try
         {
             // loading the files from the data folder
-            String fname = "australian";
-            String dir = "file_array";
-
             this.noFeatures = Integer.parseInt(ReadResults.read1Line("Data/" + fname + "/noFeatures.txt"));
             this.data = FileHandler.loadDataset(new File("Data/" + fname + "/Data.data"), noFeatures, ",");
 
@@ -71,12 +74,18 @@ public abstract class BaseRepresentationRun
             // get the accuracy performance by using the original data
             ClassificationPerformance originalAcc = new ClassificationPerformance(data, problem.getMyclassifier());
 
-            for(Map.Entry<String, Double> entry : originalAcc.getClassificationPerformance().entrySet())
+            Map<String, Double> p = originalAcc.getClassificationPerformance();
+
+            for(Map.Entry<String, Double> entry : p.entrySet())
             {
                 System.out.println(entry.getKey() + ": " + entry.getValue());
             }
 
             this.foldsTrain = originalAcc.getTraining().folds(TOTAL_FOLDS_NUMBER, new Random(1));
+
+            this.fullTrain = p.get(ClassificationPerformance.FULL_SET_TRAINING_ACC_TAG);
+            this.fullTest = p.get(ClassificationPerformance.FULL_SET_TESTING_ACC_TAG);
+
             this.training = originalAcc.getTraining();
             this.testing = originalAcc.getTesting();
 
@@ -87,7 +96,10 @@ public abstract class BaseRepresentationRun
         catch (IOException e)
         {
             e.printStackTrace();
+            return false;
         }
+
+        return true;
     }
 
 

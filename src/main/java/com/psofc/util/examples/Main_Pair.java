@@ -692,18 +692,18 @@ public class Main_Pair
         try
         {
             OutputYan out = new OutputYan(dir, fname);
-            out.printYan(number_of_iterations, number_of_runs,
-                    averageGbestIterations, aveErTrainIterations, df, dg,
-                    accTestRunsYan, timeRuns, bestAccTest, aveTrainAccYan,
-                    aveAccTestYan, stdAccTestYan, stdTrainAccYan, fullTest,
-                    aveFitness, stdFitness, accTrainRunsYan, bestFitnessRuns,
-                    bestRun, dimension, bestPositionRuns, gbestRunsIterations,
-                    eroGbestRunsIterations, fullTrain, accTrainRunsYan,
-                    accTestRunsYan, accTrainRunsDT, accTestRunsDT,
-                    CFOrgAccTrainingRunsDT, CFOrgAccTestingRunsDT,
-                    accTrainRunsNB, accTestRunsNB, CFOrgAccTrainingRunsNB,
-                    CFOrgAccTestingRunsNB, accTrainRunsKNN, accTestRunsKNN,
-                    CFOrgAccTrainingRunsKNN, CFOrgAccTestingRunsKNN);
+//            out.printYan(number_of_iterations, number_of_runs,
+//                    averageGbestIterations, aveErTrainIterations, df, dg,
+//                    accTestRunsYan, timeRuns, bestAccTest, aveTrainAccYan,
+//                    aveAccTestYan, stdAccTestYan, stdTrainAccYan, fullTest,
+//                    aveFitness, stdFitness, accTrainRunsYan, bestFitnessRuns,
+//                    bestRun, dimension, bestPositionRuns, gbestRunsIterations,
+//                    eroGbestRunsIterations, fullTrain, accTrainRunsYan,
+//                    accTestRunsYan, accTrainRunsDT, accTestRunsDT,
+//                    CFOrgAccTrainingRunsDT, CFOrgAccTestingRunsDT,
+//                    accTrainRunsNB, accTestRunsNB, CFOrgAccTrainingRunsNB,
+//                    CFOrgAccTestingRunsNB, accTrainRunsKNN, accTestRunsKNN,
+//                    CFOrgAccTrainingRunsKNN, CFOrgAccTestingRunsKNN);
 
             out.printOperators(operatorsRuns, number_of_runs);
             // CF only
