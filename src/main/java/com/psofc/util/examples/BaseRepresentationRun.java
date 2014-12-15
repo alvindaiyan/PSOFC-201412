@@ -81,5 +81,17 @@ public abstract class BaseRepresentationRun
 
 
 
+    public long[] getRandomSeeder()
+    {
+        long[] Seeder = new long[number_of_runs];
+        for (int r = 0; r < number_of_runs; r++)
+        {
+            Seeder[r] = r * r * r * 135 + r * r * 246 + 78;
+        }
+        return Seeder;
+    }
 
+
+
+    public abstract void start();
 }
