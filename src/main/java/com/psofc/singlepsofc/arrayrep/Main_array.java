@@ -37,11 +37,12 @@ public class Main_array {
 
 	/**
 	 * @param args
-	 *            the command line arguments
+	 *
+	 * the command line arguments
 	 */
 	public static void main(String[] args) throws Exception {
 
-		String fname = args[0];
+		String fname = "australian";
 		String dir = "file_array";
 		int noFeatures = Integer.parseInt(ReadResults.read1Line("Data/" + fname
 				+ "/noFeatures.txt"));
