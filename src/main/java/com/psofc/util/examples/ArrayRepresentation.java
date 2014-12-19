@@ -23,7 +23,8 @@ public class ArrayRepresentation extends BaseRepresentationRun
     @Override
     public void start(long[] seeder)
     {
-        ArrRecord arrRecord = new ArrRecord();
+        ArrRecord arrRecord = new ArrRecord(number_of_runs, number_of_iterations,
+                dimension, training_size, testing_size);
 
         /** start PSO */
         for(int r = 0; r < number_of_runs; r++)
@@ -120,7 +121,7 @@ public class ArrayRepresentation extends BaseRepresentationRun
 
         int bestRun = getBestRun(arrRecord);
 
-
+        printResult(arrRecord, bestRun);
     }
 
     private void printResult(ArrRecord arrRecord, int bestRun)
@@ -315,21 +316,21 @@ public class ArrayRepresentation extends BaseRepresentationRun
         System.out.println(formatter.format(CFOrg_stdTrainAcc_DT)); // DT
         System.out.println("================================");
 
-        double[] averageGbestIterations = new double[number_of_iterations]; // average best fitness of all runs in each iterate for plot
-        double[] aveErTrainIterations = new double[number_of_iterations];
-
-        // average best fitness of all runs in each iterate
-        averageGbestIterations = NewMath.AverageRunIterations(arrRecord.gbestRunsIterations);
-
-        // averageCaching = NewMath.AverageRunIterations(CachingRunsIterations);
-        // average caching of all runs in each iterate
-        aveErTrainIterations = NewMath.AverageRunIterations(arrRecord.eroGbestRunsIterations);// average Train
-        // Error of Gbest fitness of all runs in each iterate
+//        double[] averageGbestIterations = new double[number_of_iterations]; // average best fitness of all runs in each iterate for plot
+//        double[] aveErTrainIterations = new double[number_of_iterations];
+//
+//        // average best fitness of all runs in each iterate
+//        averageGbestIterations = NewMath.AverageRunIterations(arrRecord.gbestRunsIterations);
+//
+//        // averageCaching = NewMath.AverageRunIterations(CachingRunsIterations);
+//        // average caching of all runs in each iterate
+//        aveErTrainIterations = NewMath.AverageRunIterations(arrRecord.eroGbestRunsIterations);// average Train
+//        // Error of Gbest fitness of all runs in each iterate
 
 
         try
         {
-            OutputYan out = new OutputYan(dir, fname);
+//            OutputYan out = new OutputYan(dir, fname);
 //            out.printYan(number_of_iterations, number_of_runs,
 //                    averageGbestIterations, aveErTrainIterations,
 //                    df, dg, aveTrainAccYan,
@@ -337,9 +338,9 @@ public class ArrayRepresentation extends BaseRepresentationRun
 //                    fullTest, aveFitness, stdFitness,
 //                    bestRun, dimension, fullTrain, ArrRecord);
 
-            out.printOperators(arrRecord.operatorsRuns, number_of_runs);
+//            out.printOperators(arrRecord.operatorsRuns, number_of_runs);
 
-            out.printConstructedFeature(arrRecord.constructedFeatureTrRuns, arrRecord.constructedFeatureTtRuns, number_of_runs);
+//            out.printConstructedFeature(arrRecord.constructedFeatureTrRuns, arrRecord.constructedFeatureTtRuns, number_of_runs);
 
             // CF only
 
@@ -354,29 +355,29 @@ public class ArrayRepresentation extends BaseRepresentationRun
             Dataset fcdata = HelpDataset.removeFeatures(data, features);
             fcdata = FCFunction.calConstructFeaBing(fcdata, arrRecord.operatorsRuns[bestRun]);
             double[] cf_best_result = null;
-            try
-            {
-                cf_best_result = out
-                        .superDataTestingAcc(fcdata, "CF");
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-            System.out.println();
-            System.out.println();
-
-            // CF + org
-            double[] cforg_best_result = null;
-            try
-            {
-                cforg_best_result = out.superDataTestingAcc(
-                        out.constructNewDataset(data, features, arrRecord.operatorsRuns[bestRun]), "CFOrg");
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
+//            try
+//            {
+//                cf_best_result = out
+//                        .superDataTestingAcc(fcdata, "CF");
+//            }
+//            catch (Exception e)
+//            {
+//                e.printStackTrace();
+//            }
+//            System.out.println();
+//            System.out.println();
+//
+//            // CF + org
+//            double[] cforg_best_result = null;
+//            try
+//            {
+//                cforg_best_result = out.superDataTestingAcc(
+//                        out.constructNewDataset(data, features, arrRecord.operatorsRuns[bestRun]), "CFOrg");
+//            }
+//            catch (Exception e)
+//            {
+//                e.printStackTrace();
+//            }
 
             double[] orgTest = OrgClassification.excuteClassification2(fname);
 
@@ -469,9 +470,9 @@ public class ArrayRepresentation extends BaseRepresentationRun
 
     /**
      * calculate testing accuracy of the constructed feature
-     * @param r
-     * @param arrRecord
-     * @param initTime
+     * @param r run
+     * @param arrRecord the record object
+     * @param initTime start time
      */
     private void recordIteration(int r, ArrRecord arrRecord ,long initTime)
     {
@@ -631,60 +632,6 @@ public class ArrayRepresentation extends BaseRepresentationRun
 
 
 
-    public class ArrRecord implements PrintResult.Record
-    {
-        double bestAccTest = 0.0;
-
-        double[][] gbestRunsIterations = new double[number_of_runs][number_of_iterations]; // get best fitness in each iterate in each run
-        double[][] eroGbestRunsIterations = new double[number_of_runs][number_of_iterations];
-
-        double[] bestFitnessRuns = new double[number_of_runs]; // get final bestfitnes in each run
-
-        double[] accTestRunsYan = new double[number_of_runs]; // the best testing accuracy in each run
-        double[] accTrainRunsYan = new double[number_of_runs];
-        int YanNum1 = number_of_runs;
-        int YanNum2 = number_of_runs;
-
-        double[] accTestRunsDT = new double[number_of_runs]; // the best testing accuracy in each run
-        double[] accTrainRunsDT = new double[number_of_runs];
-        int DTNum1 = number_of_runs;
-        int DTNum2 = number_of_runs;
-
-        double[] accTestRunsKNN = new double[number_of_runs]; // the best testing accuracy in each run
-        double[] accTrainRunsKNN = new double[number_of_runs];
-        int KNNNum1 = number_of_runs;
-        int KNNNum2 = number_of_runs;
-
-        double[] accTestRunsNB = new double[number_of_runs]; // the best testing accuracy in each run
-        double[] accTrainRunsNB = new double[number_of_runs];
-        int NBNum1 = number_of_runs;
-        int NBNum2 = number_of_runs;
-
-        double[][] bestPositionRuns = new double[number_of_runs][dimension];// get the position of best results in each run;
-
-        long[] timeRuns = new long[number_of_runs];
-
-        double[] CFOrgAccTestingRunsDT = new double[number_of_runs];
-        double[] CFOrgAccTrainingRunsDT = new double[number_of_runs];
-
-        double[] CFOrgAccTestingRunsKNN = new double[number_of_runs];
-        double[] CFOrgAccTrainingRunsKNN = new double[number_of_runs];
-
-        double[] CFOrgAccTestingRunsNB = new double[number_of_runs];
-        double[] CFOrgAccTrainingRunsNB = new double[number_of_runs];
-
-        double[] CFOrgAccTestingRunsYan = new double[number_of_runs];
-        double[] CFOrgAccTrainingRunsYan = new double[number_of_runs];
-
-        char[][] operatorsRuns = new char[number_of_runs][dimension - 1];
-        // temperory, this need to according the results of the selected operators
-
-        double[][] constructedFeatureTrRuns = new double[number_of_runs][training_size];
-        double[][] constructedFeatureTtRuns = new double[number_of_runs][testing_size];
-
-
-
-    }
 
 
     public static void main(String[] arg)

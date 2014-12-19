@@ -28,11 +28,11 @@ public abstract class BaseRepresentationRun
 
 
     protected int dimension = 0;
-    protected int number_of_runs = 50;
+    protected int number_of_runs = 1;
     protected double w = 0.729844;
     protected double c1 = 1.49618, c2 = 1.49618;
     protected int number_of_particles = 30;
-    protected int number_of_iterations = 100;
+    protected int number_of_iterations = 50;
     protected Topology topology = new TopologyRing(30);
     protected Dataset data;
     protected Problem problem;
